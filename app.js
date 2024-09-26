@@ -15,11 +15,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     const db = client.db(dbName);
 
     app.get('/', (req, res) => {
-      db.collection('users').find().toArray()
-        .then(results => {
-          res.send(results);
-        })
-        .catch(error => res.status(500).send(error));
+      return res.send("Hi from the server ")
     });
 
     app.listen(port, () => {
