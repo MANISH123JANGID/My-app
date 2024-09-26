@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust Node.js version as per your app
+          node-version: '20'  # Adjust Node.js version as per your app
 
       - name: Install dependencies
         run: npm install
@@ -29,5 +29,4 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST 'cd my-app && git pull && npm install && pm2 restart all'
-
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST 'git config --global --add safe.directory /home/$USER/my-app && cd my-app && git pull && npm install && pm2 restart all'
